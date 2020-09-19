@@ -3,7 +3,7 @@ import "./index.css";
 
 const Product = (props) => {
     // console.log(props)
-    const {name, image, description, models, price, quantity} = props;
+    const {name, image, description, models, price, quantity, cart} = props;
 
     const showModels = ()=>{
         return models.map((model, index)=><img src={model} alt={`model-${index+1}`}/>)
@@ -17,12 +17,14 @@ const Product = (props) => {
 
 
     let [inStock, setStock] = React.useState(quantity)
-    
+    let [inCart, setCart] = React.useState(cart)
     const handleBuyClick =(e)=>{
+        console.log("cart",inCart)
         e.preventDefault();
         if(inStock>0) {
-            return setStock(inStock - 1)
+            return (setStock(inStock - 1), setCart(inCart + 1)) 
         }
+
     }
 
     let [dislikes, setDislikes]= React.useState(0)
@@ -35,7 +37,7 @@ const Product = (props) => {
 
     return (
         <div className="card">
-            <img src={image} alt={ `${name} product image` } />
+            <img src={image} alt={ `${name} product image`}/>
             <p>likes:{likes}</p>
             <button onClick={handleLikeClick}>Like</button>
             <p>dislikes:{dislikes}</p>
