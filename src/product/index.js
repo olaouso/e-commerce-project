@@ -1,9 +1,12 @@
 import React from 'react';
 import "./index.css";
 
+import {useParams} from "react-router-dom";
+import {Link} from "react-router-dom";
+
 const Product = (props) => {
     // console.log(props)
-    const {name, image, description, models, price, quantity, cart} = props;
+    const {name, image, description, models, price, quantity, cart, idRoute} = props;
 
     const showModels = ()=>{
         return models.map((model, index)=><img src={model} alt={`model-${index+1}`}/>)
@@ -34,8 +37,9 @@ const Product = (props) => {
     }
 
    
-
+    let { id } = useParams();
     return (
+        <Link to="/products/:id" >
         <div className="card">
             <img src={image} alt={ `${name} product image`}/>
             <p>likes:{likes}</p>
@@ -51,7 +55,8 @@ const Product = (props) => {
             <div className="models">
             {showModels()} 
             </div>
-        </div>    
+        </div>   
+        </Link> 
     )
 }
 export default Product

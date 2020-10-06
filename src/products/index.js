@@ -2,9 +2,10 @@ import React from 'react';
 import Product from '../product'
 import db from '../firebaseConfig'
    
-import { Link } from "react-router-dom";
+import { BrowserRouter as Router,  Route } from "react-router-dom";
 
 
+import {useParams} from "react-router-dom";
 
 
 const Products = () => {
@@ -14,10 +15,17 @@ const Products = () => {
       const res = await db.collection('products').get();
       const data = res.docs;
       //  return data.forEach(el=>console.log("data", el.data()))
-      return data.map(el=>setState(state=>[...state, el.data() ]))
+      
+      return data.map(el=> setState(state => {
+         const newItem = {
+          id: el.id,
+          ...el.data()
+        }
+         return [...state, newItem]
+      })
      
-    }
-    console.log("state", state)
+      )}
+    // console.log("state", state)
     React.useEffect(()=>{
       fetchData()
     },[])
@@ -28,19 +36,25 @@ const Products = () => {
     <div className="products">
       {
         state.map((productInfo, index)=>{ 
-          return (
+          console.log("id product",productInfo.id)
             
-            <Link to="/product">
-              <Product 
-              name={productInfo.name}
-              image={productInfo.image} 
-              description= {productInfo.description}
-              models= {productInfo.models}
-              price= {productInfo.price}
-              quantity ={productInfo.quantity}
-              cart = {productInfo.cart}
-              id={index}/>
-          </Link>
+          return (
+            <Router>
+              
+              <Route path={`/:${productInfo.id}`}>
+                <Product
+                idRoute= {productInfo.id} 
+                name={productInfo.name}
+                image={productInfo.image} 
+                description= {productInfo.description}
+                models= {productInfo.models}
+                price= {productInfo.price}
+                quantity ={productInfo.quantity}
+                cart = {productInfo.cart}
+                id={index}/>
+              </Route>
+              
+            </Router>
           )
           
         })
