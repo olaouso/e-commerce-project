@@ -37,9 +37,8 @@ const Product = (props) => {
     }
 
    
-    let { id } = useParams();
+    
     return (
-        <Link to="/products/:id" >
         <div className="card">
             <img src={image} alt={ `${name} product image`}/>
             <p>likes:{likes}</p>
@@ -56,7 +55,6 @@ const Product = (props) => {
             {showModels()} 
             </div>
         </div>   
-        </Link> 
     )
 }
 export default Product

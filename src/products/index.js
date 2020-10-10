@@ -40,7 +40,7 @@ const Products = () => {
             
           return (
             <Router>
-              
+              <div className="productList">
               <Route path={`/:${productInfo.id}`}>
                 <Product
                 idRoute= {productInfo.id} 
@@ -53,7 +53,7 @@ const Products = () => {
                 cart = {productInfo.cart}
                 id={index}/>
               </Route>
-              
+              </div>
             </Router>
           )
           
