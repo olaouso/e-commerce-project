@@ -56,7 +56,7 @@ const Product = (props) => {
             <div className="models">
             {showModels()}  */}
              <Card style={{ width: '18rem' }}  className="col-md-4 col-lg-4">
-                <Link to={idRoute} ><Card.Img variant="top" src={image} /></Link>
+                <Link to={idRoute} ><Card.Img variant="top" src={image} />
                 <Card.Body>
                 <Card.Title>{name}</Card.Title>
                     <p>{price}$</p>
@@ -76,6 +76,7 @@ const Product = (props) => {
                         {showModels()}
                     </div>
                 </Card.Body>
+                </Link>
             </Card>
             </div>
          
