@@ -14,6 +14,8 @@ export default function ProductDetails() {
     return (
         <>
             hi
+            {fetchProductDetail()}
+            {console.log("product from productDetails", product)}
         </>
     )
 }

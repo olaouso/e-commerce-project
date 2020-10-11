@@ -2,7 +2,7 @@ import React from 'react';
 import Product from '../product'
 import db from '../firebaseConfig'
    
-import { BrowserRouter as Router,  Route } from "react-router-dom";
+import { BrowserRouter as Router,  Route, Link } from "react-router-dom";
 
 
 import {useParams} from "react-router-dom";
@@ -25,7 +25,7 @@ const Products = () => {
       })
      
       )}
-    // console.log("state", state)
+    console.log("state", state)
     React.useEffect(()=>{
       fetchData()
     },[])
@@ -33,15 +33,17 @@ const Products = () => {
     // console.log("state",state)
  
     return (
-    <div className="products">
+    <div className="products container" >
+      <div className="row">
+
+      
       {
         state.map((productInfo, index)=>{ 
           console.log("id product",productInfo.id)
             
           return (
-            <Router>
-              <div className="productList">
-              <Route path={`/:${productInfo.id}`}>
+              <div >
+                <Link  key={productInfo.id} to={`/products/${productInfo.id}`}>
                 <Product
                 idRoute= {productInfo.id} 
                 name={productInfo.name}
@@ -52,13 +54,14 @@ const Products = () => {
                 quantity ={productInfo.quantity}
                 cart = {productInfo.cart}
                 id={index}/>
-              </Route>
+                </Link>
               </div>
-            </Router>
+           
           )
           
         })
       }
+      </div>
     </div>)
       //map all products and return each product with its prop
 }
