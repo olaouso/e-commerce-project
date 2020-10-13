@@ -4,7 +4,8 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
 import {useParams} from "react-router-dom";
-import {Link} from "react-router-dom";
+import {Link, Route} from "react-router-dom";
+import ProductDetails from '../ProductDetails/productDetails';
 
 const Product = (props) => {
     // console.log(props)
@@ -17,17 +18,18 @@ const Product = (props) => {
     let [likes, setLikes] = React.useState(0)
     const handleLikeClick = (e)=>{
         e.preventDefault();
-        setLikes(likes + 1)
+        setLikes(prevState=>prevState + 1)
     }
 
 
     let [inStock, setStock] = React.useState(quantity)
     let [inCart, setCart] = React.useState(cart)
     const handleBuyClick =(e)=>{
-        console.log("cart",inCart)
+        console.log("cart",cart)
         e.preventDefault();
         if(inStock>0) {
-            return (setStock(inStock - 1), setCart(inCart + 1)) 
+            setStock(prevState =>prevState- 1)
+            setCart(prevState=> prevState + 1)
         }
 
     }
@@ -35,7 +37,7 @@ const Product = (props) => {
     let [dislikes, setDislikes]= React.useState(0)
     const handleDislikeClick = (e)=>{
         e.preventDefault();
-        setDislikes(dislikes + 1)
+        setDislikes(prevState=> prevState + 1)
     }
 
    
@@ -56,7 +58,10 @@ const Product = (props) => {
             <div className="models">
             {showModels()}  */}
              <Card style={{ width: '18rem' }}  className="col-md-4 col-lg-4">
-                <Link to={idRoute} ><Card.Img variant="top" src={image} />
+                 
+             <Link to={`products/${idRoute}`}  >
+                <Card.Img variant="top" src={image} />
+                </Link>
                 <Card.Body>
                 <Card.Title>{name}</Card.Title>
                     <p>{price}$</p>
@@ -76,7 +81,7 @@ const Product = (props) => {
                         {showModels()}
                     </div>
                 </Card.Body>
-                </Link>
+            
             </Card>
             </div>
          

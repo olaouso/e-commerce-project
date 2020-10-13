@@ -15,9 +15,10 @@ const firebaseConfig = {
 
   };
   // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
+ export const fire =firebase.initializeApp(firebaseConfig);
+ 
 
   // Initialize the FirebaseUI Widget using Firebase.
-export const ui = new firebaseui.auth.AuthUI(firebase.auth());
+// export const ui = new firebaseui.auth.AuthUI(firebase.auth());
   export default firebase.firestore();
 

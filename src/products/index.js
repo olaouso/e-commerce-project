@@ -3,7 +3,7 @@ import Product from '../product'
 import db from '../firebaseConfig'
    
 import { BrowserRouter as Router,  Route, Link } from "react-router-dom";
-
+import ProductDetails from "../ProductDetails/productDetails"
 
 import {useParams} from "react-router-dom";
 
@@ -39,11 +39,11 @@ const Products = () => {
       
       {
         state.map((productInfo, index)=>{ 
-          console.log("id product",productInfo.id)
+          console.log("id product",productInfo.cart,productInfo.id )
             
           return (
               <div >
-                <Link  key={productInfo.id} to={`/products/${productInfo.id}`}>
+                
                 <Product
                 idRoute= {productInfo.id} 
                 name={productInfo.name}
@@ -54,7 +54,7 @@ const Products = () => {
                 quantity ={productInfo.quantity}
                 cart = {productInfo.cart}
                 id={index}/>
-                </Link>
+                
               </div>
            
           )
